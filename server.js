@@ -1,4 +1,4 @@
-const { getUnixEpoch, getUTCString } = require('./utils/helpers')
+const { isValidDate, isInteger } = require('./utils/helpers')
 
 const express = require('express');
 const app = express();
@@ -23,7 +23,12 @@ app.get('/api/hello', function (req, res) {
 
 app.get('/api/:time', (req, res) => {
   const { time } = req.params;
-  res.json({ "unix": getUnixEpoch(time), "utc": getUTCString(time) })
+  const date = new Date(isInteger(time) ? parseInt(time) : time);
+  if (isValidDate(date)) {
+    res.json({ "unix": date.getTime(), "utc": date.toUTCString() })
+  } else {
+    res.status(400).json({ error: "Invalid Date" });
+  }
 });
 
 const listener = app.listen(process.env.PORT, function () {

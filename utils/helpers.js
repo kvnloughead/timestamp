@@ -2,15 +2,11 @@ const isInteger = (value) => {
   return /^\d+$/.test(value);
 }
 
-const getUnixEpoch = (t) => {
-  return new Date(isInteger(t) ? parseInt(t) : t).getTime();
-}
-
-const getUTCString = (t) => {
-  return new Date(isInteger(t) ? parseInt(t) : t).toUTCString();
+const isValidDate = (date) => {
+  return !isNaN(date.getTime());
 }
 
 module.exports = {
-  getUnixEpoch,
-  getUTCString
+  isValidDate,
+  isInteger
 }
