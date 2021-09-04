@@ -1,5 +1,4 @@
 const isInteger = (value) => {
-  console.log('value ', value)
   return /^\d+$/.test(value);
 }
 
