@@ -21,6 +21,11 @@ app.get('/api/hello', function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// 
+app.get('/api', (req, res) => {
+  res.json({ "unix": new Date().getTime(), "utc": new Date().toUTCString() })
+});
+
 app.get('/api/:time', (req, res) => {
   const { time } = req.params;
   const date = new Date(isInteger(time) ? parseInt(time) : time);
